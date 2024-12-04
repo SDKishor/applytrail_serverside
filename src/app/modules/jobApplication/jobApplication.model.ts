@@ -19,8 +19,16 @@ const jobApplicationSchema = new Schema<IJobApplication>(
       enum: ['Applied', 'Interviewing', 'Offered', 'Rejected', 'Accepted'],
       required: true,
     },
-    analyticsId: { type: String, required: true },
-    profileId: { type: String, required: true },
+    analyticsId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Analysis',
+    },
+    profileId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'userProfile',
+    },
   },
   {
     timestamps: true, // Automatically add `createdAt` and `updatedAt` fields

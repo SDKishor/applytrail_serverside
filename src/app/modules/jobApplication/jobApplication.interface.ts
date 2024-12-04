@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IJobApplication {
   title: string;
   description?: string;
@@ -7,6 +9,6 @@ export interface IJobApplication {
   applyDate: Date;
   interviewDate?: Date;
   status: 'Applied' | 'Interviewing' | 'Offered' | 'Rejected' | 'Accepted';
-  analyticsId: string; // ID for tracking analytics
-  profileId: string; // ID of the user profile associated with the job application
+  analyticsId: Types.ObjectId; // ID for tracking analytics
+  profileId: Types.ObjectId; // ID of the user profile associated with the job application
 }
