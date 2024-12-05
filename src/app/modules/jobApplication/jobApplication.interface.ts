@@ -9,6 +9,7 @@ export interface IJobApplication {
   applyDate: Date;
   interviewDate?: Date;
   status: 'Applied' | 'Interviewing' | 'Offered' | 'Rejected' | 'Accepted';
+  source: 'LinkedIn' | 'Company website' | 'Job board' | 'Referrals';
   analyticsId: Types.ObjectId; // ID for tracking analytics
-  profileId: Types.ObjectId; // ID of the user profile associated with the job application
+  profileId: string; // ID of the user profile associated with the job application
 }

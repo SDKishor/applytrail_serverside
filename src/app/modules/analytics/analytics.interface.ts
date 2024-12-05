@@ -1,5 +1,3 @@
-import { Types } from 'mongoose';
-
 export interface IAnalytics {
   applied: number;
   screening: number;
@@ -13,5 +11,11 @@ export interface IAnalytics {
     w5: number;
     w6: number;
   };
-  profileId: Types.ObjectId;
+  source: {
+    linkedin: number;
+    companyWebsite: number;
+    jobBoard: number;
+    referrals: number;
+  };
+  profileId: string;
 }

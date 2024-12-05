@@ -19,15 +19,19 @@ const jobApplicationSchema = new Schema<IJobApplication>(
       enum: ['Applied', 'Interviewing', 'Offered', 'Rejected', 'Accepted'],
       required: true,
     },
+    source: {
+      type: String,
+      enum: ['LinkedIn', 'Company website', 'Job board', 'Referrals'],
+      required: true,
+    },
     analyticsId: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'Analysis',
     },
     profileId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
-      ref: 'userProfile',
     },
   },
   {

@@ -15,10 +15,15 @@ const AnalyticsSchema = new Schema<IAnalytics>(
       w5: { type: Number, default: 0 },
       w6: { type: Number, default: 0 },
     },
+    source: {
+      linkedin: { type: Number, default: 0 },
+      companyWebsite: { type: Number, default: 0 },
+      jobBoard: { type: Number, default: 0 },
+      referrals: { type: Number, default: 0 },
+    },
     profileId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
-      ref: 'userProfile',
     },
   },
   {
