@@ -27,6 +27,19 @@ const getAllJobApplication: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+const createJobApplication: RequestHandler = catchAsync(async (req, res) => {
+  const jobApplication = await JobApplicationService.createJobApplicationIntoDB(
+    req.body,
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'JobApplication created successfully',
+    data: jobApplication,
+  });
+});
+
 export const JobApplicationController = {
   getAllJobApplication,
+  createJobApplication,
 };

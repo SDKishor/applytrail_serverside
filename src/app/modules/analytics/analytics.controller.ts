@@ -14,4 +14,40 @@ const createAnalytics: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
-export const AnalyticsController = { createAnalytics };
+const getAnalytics: RequestHandler = catchAsync(async (req, res) => {
+  const { profileId } = req.params;
+
+  if (!profileId) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'profileId is required',
+      data: null,
+    });
+  }
+
+  const result = await AnalyticsService.getAnalyticsFromDB(
+    profileId.split(':')[1],
+  );
+
+  if (result.length === 0) {
+    return sendResponse(res, {
+      statusCode: 404,
+      success: false,
+      message: 'Analytics not found',
+      data: null,
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Analytics fetched successfully',
+    data: result,
+  });
+});
+
+export const AnalyticsController = {
+  createAnalytics,
+  getAnalytics,
+};

@@ -8,6 +8,14 @@ const createAnalyticsIntoDB = async (
   return result;
 };
 
+const getAnalyticsFromDB = async (payload: string): Promise<IAnalytics[]> => {
+  //get analytic by the profileId
+  const result = await Analytics.find({ profileId: payload });
+
+  return result;
+};
+
 export const AnalyticsService = {
   createAnalyticsIntoDB,
+  getAnalyticsFromDB,
 };

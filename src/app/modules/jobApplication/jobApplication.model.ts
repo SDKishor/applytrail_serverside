@@ -21,7 +21,7 @@ const jobApplicationSchema = new Schema<IJobApplication>(
     },
     source: {
       type: String,
-      enum: ['LinkedIn', 'Company website', 'Job board', 'Referrals'],
+      enum: ['linkedin', 'companyWebsite', 'jobBoard', 'referrals'],
       required: true,
     },
     analyticsId: {
