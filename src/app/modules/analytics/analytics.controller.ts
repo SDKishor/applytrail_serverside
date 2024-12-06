@@ -26,9 +26,7 @@ const getAnalytics: RequestHandler = catchAsync(async (req, res) => {
     });
   }
 
-  const result = await AnalyticsService.getAnalyticsFromDB(
-    profileId.split(':')[1],
-  );
+  const result = await AnalyticsService.getAnalyticsFromDB(profileId);
 
   if (result.length === 0) {
     return sendResponse(res, {

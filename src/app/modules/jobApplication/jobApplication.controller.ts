@@ -39,7 +39,64 @@ const createJobApplication: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleJobApplication: RequestHandler = catchAsync(async (req, res) => {
+  const jobApplicationId = req.params.jobApplicationId;
+  const jobApplication =
+    await JobApplicationService.getSingleJobApplicationFromDB(jobApplicationId);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'JobApplication fetched successfully',
+    data: jobApplication,
+  });
+});
+
+const updateJobApplication: RequestHandler = catchAsync(async (req, res) => {
+  const jobApplicationId = req.params.jobApplicationId;
+  const { interviewDate, status } = req.body;
+
+  if (!jobApplicationId) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'jobApplicationId is required',
+      data: null,
+    });
+  }
+
+  if (!status) {
+    return sendResponse(res, {
+      statusCode: 400,
+      success: false,
+      message: 'Status is required',
+      data: null,
+    });
+  }
+  if (status === 'Interviewing') {
+    if (!interviewDate) {
+      return sendResponse(res, {
+        statusCode: 400,
+        success: false,
+        message: 'interviewDate is required',
+        data: null,
+      });
+    }
+  }
+
+  const jobApplication = await JobApplicationService.updateJobApplicationIntoDB(
+    { id: jobApplicationId, interviewDate, status },
+  );
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'JobApplication updated successfully',
+    data: jobApplication,
+  });
+});
+
 export const JobApplicationController = {
   getAllJobApplication,
   createJobApplication,
+  getSingleJobApplication,
+  updateJobApplication,
 };

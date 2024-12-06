@@ -10,6 +10,12 @@ const getAllJobApplicationFromDB = async (id: string) => {
   return jobApplication;
 };
 
+const getSingleJobApplicationFromDB = async (payload: string) => {
+  const jobApplication = await JobApplication.findById(payload);
+
+  return jobApplication;
+};
+
 const createJobApplicationIntoDB = async (payload: IJobApplication) => {
   const analytics = await Analytics.find({
     profileId: payload.profileId,
@@ -45,7 +51,29 @@ const createJobApplicationIntoDB = async (payload: IJobApplication) => {
   }
 };
 
+interface updatepayloadProp {
+  id: string;
+  interviewDate?: Date;
+  status: IJobApplication['status'];
+}
+
+const updateJobApplicationIntoDB = async (payload: updatepayloadProp) => {
+  const result = await JobApplication.findOneAndUpdate(
+    { _id: payload.id },
+    {
+      $set: {
+        interviewDate: payload.interviewDate,
+        status: payload.status,
+      },
+    },
+    { new: true },
+  );
+  return result;
+};
+
 export const JobApplicationService = {
   getAllJobApplicationFromDB,
   createJobApplicationIntoDB,
+  getSingleJobApplicationFromDB,
+  updateJobApplicationIntoDB,
 };
